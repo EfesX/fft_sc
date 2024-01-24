@@ -1,0 +1,5 @@
+*.pdf
+sim/modelsim/*
+!sim/modelsim/modelsim.ini
+
+*.bak
