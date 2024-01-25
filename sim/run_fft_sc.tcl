@@ -28,16 +28,18 @@ add wave -group reord_in    sim:/fft_sc/in_reorder/*
 #add wave -group st4_pe          sim:/fft_sc/stage_4/proc_elem/*
 #add wave -group st4_pe_butter   sim:/fft_sc/stage_4/proc_elem/genblk1/butterfly/*
 
-add wave -group st1 {sim:/fft_sc/genblk1[0]/stage/*}
+add wave -group st1     {sim:/fft_sc/genblk1[0]/stage/*}
+add wave -group st1_rot {sim:/fft_sc/genblk1[0]/stage/genblk1/proc_elem/genblk3/rotator/*}
+
 add wave -group st2 {sim:/fft_sc/genblk1[1]/stage/*}
 add wave -group st3 {sim:/fft_sc/genblk1[2]/stage/*}
 add wave -group st4 {sim:/fft_sc/genblk1[3]/stage/*}
-add wave -group st5 {sim:/fft_sc/genblk1[4]/stage/*}
+#add wave -group st5 {sim:/fft_sc/genblk1[4]/stage/*}
 
 add wave -group oro   sim:/fft_sc/out_reorder/*
 add wave -group oro1 {sim:/fft_sc/out_reorder/genblk1[0]/GEN_FIRST_REORDER/reorder/*}
 add wave -group oro2 {sim:/fft_sc/out_reorder/genblk1[1]/GEN_SECOND_REORDER/reorder/*}
-add wave -group oro3 {sim:/fft_sc/out_reorder/genblk1[2]/GEN_ANOTHER_REORDERS/reorder/*}
+#add wave -group oro3 {sim:/fft_sc/out_reorder/genblk1[2]/GEN_ANOTHER_REORDERS/reorder/*}
 
 
 
@@ -97,54 +99,54 @@ run 5
 force -freeze sim:/fft_sc/din_im 0000000000001111 0
 force -freeze sim:/fft_sc/din_re 0000000000000000 0
 
-run 5
-force -freeze sim:/fft_sc/din_im 0000000000010000 0
-force -freeze sim:/fft_sc/din_re 0000000000000000 0
-run 5
-force -freeze sim:/fft_sc/din_im 0000000000010001 0
-force -freeze sim:/fft_sc/din_re 0000000000000000 0
-run 5
-force -freeze sim:/fft_sc/din_im 0000000000010010 0
-force -freeze sim:/fft_sc/din_re 0000000000000000 0
-run 5
-force -freeze sim:/fft_sc/din_im 0000000000010011 0
-force -freeze sim:/fft_sc/din_re 0000000000000000 0
-run 5
-force -freeze sim:/fft_sc/din_im 0000000000010100 0
-force -freeze sim:/fft_sc/din_re 0000000000000000 0
-run 5
-force -freeze sim:/fft_sc/din_im 0000000000010101 0
-force -freeze sim:/fft_sc/din_re 0000000000000000 0
-run 5
-force -freeze sim:/fft_sc/din_im 0000000000010110 0
-force -freeze sim:/fft_sc/din_re 0000000000000000 0
-run 5
-force -freeze sim:/fft_sc/din_im 0000000000010111 0
-force -freeze sim:/fft_sc/din_re 0000000000000000 0
-run 5
-force -freeze sim:/fft_sc/din_im 0000000000011000 0
-force -freeze sim:/fft_sc/din_re 0000000000000000 0
-run 5
-force -freeze sim:/fft_sc/din_im 0000000000011001 0
-force -freeze sim:/fft_sc/din_re 0000000000000000 0
-run 5
-force -freeze sim:/fft_sc/din_im 0000000000011010 0
-force -freeze sim:/fft_sc/din_re 0000000000000000 0
-run 5
-force -freeze sim:/fft_sc/din_im 0000000000011011 0
-force -freeze sim:/fft_sc/din_re 0000000000000000 0
-run 5
-force -freeze sim:/fft_sc/din_im 0000000000011100 0
-force -freeze sim:/fft_sc/din_re 0000000000000000 0
-run 5
-force -freeze sim:/fft_sc/din_im 0000000000011101 0
-force -freeze sim:/fft_sc/din_re 0000000000000000 0
-run 5
-force -freeze sim:/fft_sc/din_im 0000000000011110 0
-force -freeze sim:/fft_sc/din_re 0000000000000000 0
-run 5
-force -freeze sim:/fft_sc/din_im 0000000000011111 0
-force -freeze sim:/fft_sc/din_re 0000000000000000 0
+#run 5
+#force -freeze sim:/fft_sc/din_im 0000000000010000 0
+#force -freeze sim:/fft_sc/din_re 0000000000000000 0
+#run 5
+#force -freeze sim:/fft_sc/din_im 0000000000010001 0
+#force -freeze sim:/fft_sc/din_re 0000000000000000 0
+#run 5
+#force -freeze sim:/fft_sc/din_im 0000000000010010 0
+#force -freeze sim:/fft_sc/din_re 0000000000000000 0
+#run 5
+#force -freeze sim:/fft_sc/din_im 0000000000010011 0
+#force -freeze sim:/fft_sc/din_re 0000000000000000 0
+#run 5
+#force -freeze sim:/fft_sc/din_im 0000000000010100 0
+#force -freeze sim:/fft_sc/din_re 0000000000000000 0
+#run 5
+#force -freeze sim:/fft_sc/din_im 0000000000010101 0
+#force -freeze sim:/fft_sc/din_re 0000000000000000 0
+#run 5
+#force -freeze sim:/fft_sc/din_im 0000000000010110 0
+#force -freeze sim:/fft_sc/din_re 0000000000000000 0
+#run 5
+#force -freeze sim:/fft_sc/din_im 0000000000010111 0
+#force -freeze sim:/fft_sc/din_re 0000000000000000 0
+#run 5
+#force -freeze sim:/fft_sc/din_im 0000000000011000 0
+#force -freeze sim:/fft_sc/din_re 0000000000000000 0
+#run 5
+#force -freeze sim:/fft_sc/din_im 0000000000011001 0
+#force -freeze sim:/fft_sc/din_re 0000000000000000 0
+#run 5
+#force -freeze sim:/fft_sc/din_im 0000000000011010 0
+#force -freeze sim:/fft_sc/din_re 0000000000000000 0
+#run 5
+#force -freeze sim:/fft_sc/din_im 0000000000011011 0
+#force -freeze sim:/fft_sc/din_re 0000000000000000 0
+#run 5
+#force -freeze sim:/fft_sc/din_im 0000000000011100 0
+#force -freeze sim:/fft_sc/din_re 0000000000000000 0
+#run 5
+#force -freeze sim:/fft_sc/din_im 0000000000011101 0
+#force -freeze sim:/fft_sc/din_re 0000000000000000 0
+#run 5
+#force -freeze sim:/fft_sc/din_im 0000000000011110 0
+#force -freeze sim:/fft_sc/din_re 0000000000000000 0
+#run 5
+#force -freeze sim:/fft_sc/din_im 0000000000011111 0
+#force -freeze sim:/fft_sc/din_re 0000000000000000 0
 run 5
 force -freeze sim:/fft_sc/din_valid 0 0
 

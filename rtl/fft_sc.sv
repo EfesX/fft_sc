@@ -1,7 +1,7 @@
 import fft_pkg::complex_t;
 import fft_pkg::twiddle_t;
 
-module fft_sc #(parameter int unsigned FFT_SIZE = 32) (
+module fft_sc #(parameter int unsigned FFT_SIZE = 16) (
     input  logic        clk       ,
     input  logic [15:0] din_re    ,
     input  logic [15:0] din_im    ,
