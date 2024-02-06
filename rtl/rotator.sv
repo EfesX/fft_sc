@@ -16,7 +16,7 @@ module rotator (
     logic [15:0] mux;
     assign mux = sw ? din : r_din[1];
 
-    logic [DATA_WIDTH+TWIDDLE_POWER-1:0] m_cos;
+    logic [DATA_WIDTH+TWIDDLE_POWER-1-1:0] m_cos;
     logic [DATA_WIDTH-1:0] m_cos_restricted;
     assign m_cos = $signed(r_din[0]) * $signed(twiddle.cos);
     assign m_cos_restricted = $signed(m_cos[$bits(m_cos)-1:(TWIDDLE_POWER - 1)]);

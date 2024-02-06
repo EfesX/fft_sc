@@ -36,10 +36,10 @@ module fft_sc #(parameter int unsigned FFT_SIZE = 16) (
     logic swro_in;
     assign swro_in = ~counter[$bits(counter) - 1] | counter[0];
 
-    logic     [$clog2(FFT_SIZE)-2:0][$clog2(FFT_SIZE)-2:0] twiddle_indexes;
-    twiddle_t [$clog2(FFT_SIZE)-2:0]                       twiddles       ;
+    logic     [$clog2(FFT_SIZE)-1:0][$clog2(FFT_SIZE)-2:0] twiddle_indexes;
+    twiddle_t [$clog2(FFT_SIZE)-1:0]                       twiddles       ;
 
-    complex_t [TOTAL_STAGES:0] data ;
+    complex_t [TOTAL_STAGES:0] data;
     logic     [TOTAL_STAGES:0] valid;
 
     reorder #(.LENGTH(FFT_SIZE/2-1)) in_reorder (
@@ -51,12 +51,13 @@ module fft_sc #(parameter int unsigned FFT_SIZE = 16) (
         .dout_valid(valid[0] )
     );
 
+    genvar i;
     generate
-        for (genvar i = 0; i < TOTAL_STAGES; i = i + 1) begin
+        for (i = 0; i < TOTAL_STAGES; i = i + 1) begin : GEN_STAGES
             stage #(
                 .FFT_SIZE (FFT_SIZE),
                 .NUM_STAGE(i + 1),
-                .BYPASS_PROC(1)
+                .INCLUDE_PROC(1)
             ) stage (
                 .clk          (clk      ),
                 .din          (data[i]  ),

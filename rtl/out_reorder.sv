@@ -18,11 +18,11 @@ module out_reorder #(parameter int unsigned FFT_SIZE = 16) (
     logic [TOTAL_REORDERS-1:0] valids;
     assign dout_valid = valids[TOTAL_REORDERS-1];
 
-                
+    genvar i;
     generate
-        for (genvar i = 0; i < TOTAL_REORDERS; i = i + 1) begin
-            if (i == 0) begin : GEN_FIRST_REORDER
-                
+        for (i = 0; i < TOTAL_REORDERS; i = i + 1) begin : GEN_REORDERS
+            if (i == 0) begin // FIRST REORDER
+
                 logic [TOTAL_STAGES-1:0] counter;
                 always_ff @(posedge clk) begin
                     if (din_valid) counter <= counter + 1'b1;
@@ -47,7 +47,7 @@ module out_reorder #(parameter int unsigned FFT_SIZE = 16) (
                     .dout_valid(valids[0])
                 );
 
-            end else if (i == 1) begin : GEN_SECOND_REORDER
+            end else if (i == 1) begin // GEN_SECOND_REORDER
 
                 logic [TOTAL_STAGES-1:0] counter;
                 always_ff @(posedge clk) begin
@@ -74,7 +74,7 @@ module out_reorder #(parameter int unsigned FFT_SIZE = 16) (
                     .din_valid(r_v),
                     .dout_valid(valids[1])
                 );
-            end else begin : GEN_ANOTHER_REORDERS
+            end else begin // GEN_ANOTHER_REORDERS
                 logic [TOTAL_STAGES-1:0] counter;
                 always_ff @(posedge clk) begin
                     if (valids[i-1]) counter <= counter + 1'b1;
@@ -103,6 +103,4 @@ module out_reorder #(parameter int unsigned FFT_SIZE = 16) (
             end
         end
     endgenerate
-
-
 endmodule
