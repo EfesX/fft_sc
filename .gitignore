@@ -7,8 +7,12 @@ sim/modelsim/*
 db
 incremental_db
 output_files
+greybox_tmp
 a5_pin_model_dump.txt
 *.sdc
 *.qpf
 *.qsf
 device.sv
+
+*.asv
+*.qws

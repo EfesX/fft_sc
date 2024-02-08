@@ -1,11 +1,13 @@
+import fft_pkg::DATA_WIDTH;
+
 module tb_fft_sc ();
 
     bit        clk       ;
-    bit [15:0] din_re    ;
-    bit [15:0] din_im    ;
+    bit [DATA_WIDTH-1:0] din_re    ;
+    bit [DATA_WIDTH-1:0] din_im    ;
     bit        din_valid ;
-    bit [15:0] dout_re   ;
-    bit [15:0] dout_im   ;
+    bit [DATA_WIDTH-1:0] dout_re   ;
+    bit [DATA_WIDTH-1:0] dout_im   ;
     bit        dout_valid;
 
     always #5 clk = ~clk;
@@ -17,7 +19,27 @@ module tb_fft_sc ();
     int fidw;
 
     initial begin
-        #100;
+        #251;
+
+        fid = $fopen("../in.txt", "r");
+        
+        while (!$feof(fid)) begin
+            @(posedge clk);
+            din_valid = 1;
+
+            $fscanf(fid, "%0d", val);
+            din_re = val;
+
+            $fscanf(fid, "%0d", val);
+            din_im = val;
+        end
+
+        @(posedge clk);
+        din_valid = 0;
+
+        $fclose(fid);
+
+        #40000;
 
         fid = $fopen("../in.txt", "r");
         
@@ -51,7 +73,7 @@ module tb_fft_sc ();
         $fclose(fidw);
     end
 
-    fft_sc #(.FFT_SIZE(256)) dut (
+    fft_sc #(.FFT_SIZE(1024)) dut (
         .clk       (clk       ),
         .din_re    (din_re    ),
         .din_im    (din_im    ),

@@ -1,6 +1,8 @@
 import fft_pkg::complex_t;
 import fft_pkg::twiddle_t;
 
+import fft_pkg::DATA_WIDTH;
+
 module proc_elem #(
     parameter bit INCLUDE_BUTTERFLY = 1,
     parameter bit INCLUDE_ROTATOR   = 1
@@ -12,23 +14,23 @@ module proc_elem #(
     output complex_t dout
 );
 
-    logic [15:0]       r_din_re;
-    logic [ 1:0][15:0] r_din_im;
+    logic [DATA_WIDTH-1:0]       r_din_re;
+    logic [ 1:0][DATA_WIDTH-1:0] r_din_im;
 
     always_ff @(posedge clk) begin
         r_din_re <= din.re;
         r_din_im <= { r_din_im[0], din.im };
     end
 
-    logic [15:0] mux_0;
-    logic [15:0] mux_1;
+    logic [DATA_WIDTH-1:0] mux_0;
+    logic [DATA_WIDTH-1:0] mux_1;
 
     assign mux_0 = sw ? r_din_im[1] : r_din_re;
     assign mux_1 = sw ? r_din_im[0] : din.re;
 
     generate
-        logic [15:0] d_butter_a;
-        logic [15:0] d_butter_b;
+        logic [DATA_WIDTH-1:0] d_butter_a;
+        logic [DATA_WIDTH-1:0] d_butter_b;
 
         if (INCLUDE_BUTTERFLY) begin
             butterfly butterfly (
@@ -44,8 +46,8 @@ module proc_elem #(
     endgenerate
 
     generate
-        logic [15:0] d_rotator;
-        logic [15:0] dout_b;
+        logic [DATA_WIDTH-1:0] d_rotator;
+        logic [DATA_WIDTH-1:0] dout_b;
 
         if (INCLUDE_BUTTERFLY) assign dout_b = d_butter_b;
         else assign dout_b = mux_1;
@@ -65,13 +67,13 @@ module proc_elem #(
         end
     endgenerate
 
-    logic [15:0] mux_2;
-    logic [15:0] mux_3;
+    logic [DATA_WIDTH-1:0] mux_2;
+    logic [DATA_WIDTH-1:0] mux_3;
 
     assign mux_2 = sw ? d_rotator  : d_butter_a;
     assign mux_3 = sw ? d_butter_a : d_rotator;
 
-    logic [15:0] r_out_re;
+    logic [DATA_WIDTH-1:0] r_out_re;
     always_ff @(posedge clk) r_out_re <= mux_2;
 
     assign dout.re = r_out_re;

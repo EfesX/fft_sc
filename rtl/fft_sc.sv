@@ -1,13 +1,15 @@
 import fft_pkg::complex_t;
 import fft_pkg::twiddle_t;
 
+import fft_pkg::DATA_WIDTH;
+
 module fft_sc #(parameter int unsigned FFT_SIZE = 16) (
     input  logic        clk       ,
-    input  logic [15:0] din_re    ,
-    input  logic [15:0] din_im    ,
+    input  logic [DATA_WIDTH-1:0] din_re    ,
+    input  logic [DATA_WIDTH-1:0] din_im    ,
     input  logic        din_valid ,
-    output logic [15:0] dout_re   ,
-    output logic [15:0] dout_im   ,
+    output logic [DATA_WIDTH-1:0] dout_re   ,
+    output logic [DATA_WIDTH-1:0] dout_im   ,
     output logic        dout_valid
 );
 
