@@ -2,8 +2,7 @@ import fft_pkg::twiddle_t;
 import fft_pkg::TWIDDLE_WIDTH;
 import fft_pkg::DATA_WIDTH;
 
-module rotator #(
-    parameter string MULTIPLIERS = "INTEL"// "DIRECT" / "INTEL"
+module rotator #(parameter string MULTIPLIERS = "INTEL"// "DIRECT" / "INTEL"
 ) (
     input  logic                  clk    ,
     input  logic                  sw     ,
@@ -45,30 +44,30 @@ module rotator #(
                 .sum    (1'b0)
             );
 
-            lpm_mult	lpm_sin (
-                .dataa  (mux),
-                .datab  (twiddle.sin),
-                .result (m_sin),
-                .aclr   (1'b0),
-                .clken  (1'b1),
-                .sclr   (1'b0),
-                .sum    (1'b0)
+            lpm_mult lpm_sin (
+                .dataa (mux        ),
+                .datab (twiddle.sin),
+                .result(m_sin      ),
+                .aclr  (1'b0       ),
+                .clken (1'b1       ),
+                .sclr  (1'b0       ),
+                .sum   (1'b0       )
             );
 
             defparam
                 lpm_cos.lpm_hint    = "MAXIMIZE_SPEED=9",
-                lpm_cos.lpm_representation = "SIGNED",
-                lpm_cos.lpm_type    = "LPM_MULT",
-                lpm_cos.lpm_widtha  = DATA_WIDTH,
-                lpm_cos.lpm_widthb  = TWIDDLE_WIDTH,
-                lpm_cos.lpm_widthp  = DATA_WIDTH + TWIDDLE_WIDTH,
+                    lpm_cos.lpm_representation = "SIGNED",
+                        lpm_cos.lpm_type    = "LPM_MULT",
+                            lpm_cos.lpm_widtha  = DATA_WIDTH,
+                                lpm_cos.lpm_widthb  = TWIDDLE_WIDTH,
+                                    lpm_cos.lpm_widthp  = DATA_WIDTH + TWIDDLE_WIDTH,
 
-                lpm_sin.lpm_hint    = "MAXIMIZE_SPEED=9",
-                lpm_sin.lpm_representation = "SIGNED",
-                lpm_sin.lpm_type    = "LPM_MULT",
-                lpm_sin.lpm_widtha  = DATA_WIDTH,
-                lpm_sin.lpm_widthb  = TWIDDLE_WIDTH,
-                lpm_sin.lpm_widthp  = DATA_WIDTH + TWIDDLE_WIDTH;
+                                        lpm_sin.lpm_hint    = "MAXIMIZE_SPEED=9",
+                                            lpm_sin.lpm_representation = "SIGNED",
+                                                lpm_sin.lpm_type    = "LPM_MULT",
+                                                    lpm_sin.lpm_widtha  = DATA_WIDTH,
+                                                        lpm_sin.lpm_widthb  = TWIDDLE_WIDTH,
+                                                            lpm_sin.lpm_widthp  = DATA_WIDTH + TWIDDLE_WIDTH;
         end
     endgenerate
 

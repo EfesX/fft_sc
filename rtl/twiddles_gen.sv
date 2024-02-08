@@ -1,8 +1,8 @@
 /***
-This file was generated with E:\sandbox\fpga\fft_prj\create_twiddles.py.
-This file stores twiddles coefficients for 1024-point FFT.
-Amount of ports of access to storage equals amount of stages of 1024-point FFT.
-Twiddles storage consists only first 512 coefficients.
+  This file was generated with E:\sandbox\fpga\fft_prj\create_twiddles.py.
+  This file stores twiddles coefficients for 1024-point FFT.
+  Amount of ports of access to storage equals amount of stages of 1024-point FFT.
+  Twiddles storage consists only first 512 coefficients.
 ***/
 
 import fft_pkg::twiddle_t;

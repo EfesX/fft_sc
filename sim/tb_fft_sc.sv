@@ -38,36 +38,17 @@ module tb_fft_sc ();
         din_valid = 0;
 
         $fclose(fid);
-
-        #40000;
-
-        fid = $fopen("../in.txt", "r");
-        
-        while (!$feof(fid)) begin
-            @(posedge clk);
-            din_valid = 1;
-
-            $fscanf(fid, "%0d", val);
-            din_re = val;
-
-            $fscanf(fid, "%0d", val);
-            din_im = val;
-        end
-
-        @(posedge clk);
-        din_valid = 0;
-
-        $fclose(fid);
     end
 
     initial begin
         @(posedge dout_valid);
-        
+        @(posedge clk);
+
         fidw = $fopen("../out.txt", "w");
         while (dout_valid) begin
-            @(posedge clk);
             $fdisplay(fidw, "%d", $signed(dout_re));
             $fdisplay(fidw, "%d", $signed(dout_im));
+            @(posedge clk);
         end
 
         $fclose(fidw);

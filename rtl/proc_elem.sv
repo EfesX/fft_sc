@@ -14,8 +14,8 @@ module proc_elem #(
     output complex_t dout
 );
 
-    logic [DATA_WIDTH-1:0]       r_din_re;
-    logic [ 1:0][DATA_WIDTH-1:0] r_din_im;
+    logic [DATA_WIDTH-1:0]                 r_din_re;
+    logic [           1:0][DATA_WIDTH-1:0] r_din_im;
 
     always_ff @(posedge clk) begin
         r_din_re <= din.re;

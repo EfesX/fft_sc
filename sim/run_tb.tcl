@@ -1,7 +1,17 @@
+# путь к установленному Quartus
 set QUARTUS_INSTALL_DIR "C:/intelFPGA/18.0/quartus"
 
 set RTL_DIR ../../rtl
 set SIM_DIR ..
+
+vlib lpm_ver
+
+vlog -work fv_lib $QUARTUS_INSTALL_DIR/eda/fv_lib/verilog/lpm_mult.v
+vlog -work lpm_ver $QUARTUS_INSTALL_DIR/eda/fv_lib/verilog/pipeline_internal_fv.v
+vlog -work lpm_ver $QUARTUS_INSTALL_DIR/eda/fv_lib/verilog/addsub_block.v
+vlog -work lpm_ver $QUARTUS_INSTALL_DIR/eda/fv_lib/verilog/mult_block.v
+
+vlog -work lpm_ver $QUARTUS_INSTALL_DIR/eda/sim_lib/220model.v
 
 vmap lpm_ver ./lpm_ver
 
@@ -24,7 +34,8 @@ add wave -group st1_reord {sim:/tb_fft_sc/dut/GEN_STAGES[0]/stage/genblk2/reorde
 add wave -group st2 {sim:/tb_fft_sc/dut/GEN_STAGES[1]/stage/*}
 add wave -group st3 {sim:/tb_fft_sc/dut/GEN_STAGES[2]/stage/*}
 add wave -group st4 {sim:/tb_fft_sc/dut/GEN_STAGES[3]/stage/*}
-add wave -group st4_pe    {sim:/tb_fft_sc/dut/GEN_STAGES[3]/stage/genblk1/proc_elem/*}
+
+add wave -group twid sim:/tb_fft_sc/dut/twiddles_storage/*
 
 run 3000
 run 6000

@@ -1,27 +1,31 @@
 package fft_pkg;
-
+    //! Разрядность данных
     parameter int unsigned DATA_WIDTH    = 32;
+    //! Разрядность поворотных коэффициентов
     parameter int unsigned TWIDDLE_WIDTH = 9;
 
-    typedef logic [DATA_WIDTH-1:0] data_t;
-
+    //! Представление комплексного числа
     typedef struct packed {
-        data_t re;
-        data_t im;
+        logic [DATA_WIDTH-1:0] re;
+        logic [DATA_WIDTH-1:0] im;
     } complex_t;
 
+    //! Представление поворотного коэффициента
     typedef struct packed {
         logic [TWIDDLE_WIDTH-1:0] cos;
         logic [TWIDDLE_WIDTH-1:0] sin;
     } twiddle_t;
 
-    function twiddle_t to_twiddle(logic [DATA_WIDTH-1:0] cos, logic [DATA_WIDTH-1:0] sin);
+    //! Перевод двух TWIDDLE_WIDTH-разрядных векторов в поворотный коэффициент
+    function twiddle_t to_twiddle(logic [TWIDDLE_WIDTH-1:0] cos, logic [TWIDDLE_WIDTH-1:0] sin);
         to_twiddle.cos = cos;
         to_twiddle.sin = sin;
     endfunction
 
-    function complex_t to_complex(logic [TWIDDLE_WIDTH-1:0] re, logic [TWIDDLE_WIDTH-1:0] im);
-        to_complex = to_twiddle(re, im);
+    //! Перевод двух DATA_WIDTH-разрядных векторов в комплексное число    
+    function complex_t to_complex(logic [DATA_WIDTH-1:0] re, logic [DATA_WIDTH-1:0] im);
+        to_complex.re = re;
+        to_complex.im = im;
     endfunction
     
 endpackage

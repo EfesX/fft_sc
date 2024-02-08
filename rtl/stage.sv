@@ -2,9 +2,9 @@ import fft_pkg::complex_t;
 import fft_pkg::twiddle_t;
 
 module stage #(
-    parameter int unsigned FFT_SIZE  = 16,
-    parameter int unsigned NUM_STAGE = 1,
-    parameter bit INCLUDE_PROC = 1'b0
+    parameter int unsigned FFT_SIZE     = 16  ,
+    parameter int unsigned NUM_STAGE    = 1   ,
+    parameter bit          INCLUDE_PROC = 1'b0
 ) (
     input  logic                        clk          ,
     input  complex_t                    din          ,

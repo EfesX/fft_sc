@@ -1,10 +1,11 @@
-import fft_pkg::data_t;
+import fft_pkg::DATA_WIDTH;
 
+//! Реализация операции "бабочка"
 module butterfly (
-    input  data_t ina ,
-    input  data_t inb ,
-    output data_t outa,
-    output data_t outb
+    input  logic [DATA_WIDTH-1:0] ina ,
+    input  logic [DATA_WIDTH-1:0] inb ,
+    output logic [DATA_WIDTH-1:0] outa,
+    output logic [DATA_WIDTH-1:0] outb
 );
 
 assign outa = $signed(ina) + $signed(inb);

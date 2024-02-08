@@ -1,0 +1,11 @@
+set_global_assignment -name VHDL_FILE [file join $::quartus(qip_path) "rtl/fft_pkg.sv"]         -library fft_sc_lib
+set_global_assignment -name VHDL_FILE [file join $::quartus(qip_path) "rtl/butterfly.sv"]       -library fft_sc_lib
+set_global_assignment -name VHDL_FILE [file join $::quartus(qip_path) "rtl/reorder.sv"]         -library fft_sc_lib
+set_global_assignment -name VHDL_FILE [file join $::quartus(qip_path) "rtl/twiddles_gen.sv"]    -library fft_sc_lib
+set_global_assignment -name VHDL_FILE [file join $::quartus(qip_path) "rtl/twid_idx_gen.sv"]    -library fft_sc_lib
+set_global_assignment -name VHDL_FILE [file join $::quartus(qip_path) "rtl/rotator.sv"]         -library fft_sc_lib
+set_global_assignment -name VHDL_FILE [file join $::quartus(qip_path) "rtl/proc_elem.sv"]       -library fft_sc_lib
+set_global_assignment -name VHDL_FILE [file join $::quartus(qip_path) "rtl/out_reorder.sv"]     -library fft_sc_lib
+set_global_assignment -name VHDL_FILE [file join $::quartus(qip_path) "rtl/stage.sv"]           -library fft_sc_lib
+
+set_global_assignment -name VHDL_FILE [file join $::quartus(qip_path) "rtl/fft_sc.sv"] -library fft_sc_lib

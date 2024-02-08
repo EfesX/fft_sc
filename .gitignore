@@ -1,6 +1,11 @@
 *.pdf
+!docs/fft_sc.pdf
+
 sim/modelsim/*
 !sim/modelsim/modelsim.ini
+
+sim/in.txt
+sim/out.txt
 
 *.bak
 

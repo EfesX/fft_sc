@@ -4,19 +4,19 @@ import fft_pkg::twiddle_t;
 import fft_pkg::DATA_WIDTH;
 
 module fft_sc #(parameter int unsigned FFT_SIZE = 16) (
-    input  logic        clk       ,
+    input  logic                  clk       ,
     input  logic [DATA_WIDTH-1:0] din_re    ,
     input  logic [DATA_WIDTH-1:0] din_im    ,
-    input  logic        din_valid ,
+    input  logic                  din_valid ,
     output logic [DATA_WIDTH-1:0] dout_re   ,
     output logic [DATA_WIDTH-1:0] dout_im   ,
-    output logic        dout_valid
+    output logic                  dout_valid
 );
 
     localparam int unsigned TOTAL_STAGES = $clog2(FFT_SIZE);
 
-    complex_t din;
-    logic r_din_valid;
+    complex_t din        ;
+    logic     r_din_valid;
 
     always_ff @(posedge clk) begin
         din.re <= din_re;
@@ -41,16 +41,16 @@ module fft_sc #(parameter int unsigned FFT_SIZE = 16) (
     logic     [$clog2(FFT_SIZE)-1:0][$clog2(FFT_SIZE)-2:0] twiddle_indexes;
     twiddle_t [$clog2(FFT_SIZE)-1:0]                       twiddles       ;
 
-    complex_t [TOTAL_STAGES:0] data;
+    complex_t [TOTAL_STAGES:0] data ;
     logic     [TOTAL_STAGES:0] valid;
 
     reorder #(.LENGTH(FFT_SIZE/2-1)) in_reorder (
-        .clk       (clk      ),
-        .sw        (swro_in  ),
-        .din       (din      ),
-        .dout      (data[0]  ),
+        .clk       (clk        ),
+        .sw        (swro_in    ),
+        .din       (din        ),
+        .dout      (data[0]    ),
         .din_valid (r_din_valid),
-        .dout_valid(valid[0] )
+        .dout_valid(valid[0]   )
     );
 
     genvar i;

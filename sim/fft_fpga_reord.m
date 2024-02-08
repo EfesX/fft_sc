@@ -1,9 +1,12 @@
+% This script is model of 16-point FFT which imlemented in FPGA (SC method)
+
+%% clear workspace
 clc; clear all; close all;
 
+%% 
 M_FACT = 255;
 
-
-%% input
+%% read data
 fid = fopen(".\in.txt", "r");
 rawdata = fscanf(fid, "%d");
 rawdata = rawdata(1:end);
@@ -14,7 +17,6 @@ dataim = rawdata(2:2:end);
 data = complex(datare, dataim);
 
 in = data;
-
 
 %% input reorder
 inr = zeros(16, 1);
